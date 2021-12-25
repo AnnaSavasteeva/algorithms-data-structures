@@ -1,10 +1,9 @@
 package lesson3;
 
-import lesson3.queue.PriorityQueueImpl;
 import lesson3.queue.Queue;
-import lesson3.queue.QueueImpl;
 import lesson3.stack.Stack;
-import lesson3.stack.StackImpl;
+import lesson4.LinkedListStack;
+import lesson4.LinkedQueue;
 
 
 public class Test3 {
@@ -16,7 +15,8 @@ public class Test3 {
 
     private static void testStack() {
 
-        Stack<Integer> stack = new StackImpl<>(4);
+//        Stack<Integer> stack = new StackImpl<>(4);
+        Stack<Integer> stack = new LinkedListStack<>();
 
         System.out.println(addToStack(stack, 12));
         System.out.println(addToStack(stack, 16));
@@ -42,7 +42,8 @@ public class Test3 {
 
     private static void testQueue() {
 
-        Queue<Integer> queue = new QueueImpl<>(4);
+//        Queue<Integer> queue = new QueueImpl<>(4);
+        Queue<Integer> queue = new LinkedQueue<>();
 
         System.out.println("add element: " + queue.insert(34));
         System.out.println("add element: " + queue.insert(12));
