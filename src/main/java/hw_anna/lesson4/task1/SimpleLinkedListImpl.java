@@ -2,7 +2,7 @@ package hw_anna.lesson4.task1;
 
 import java.util.Iterator;
 
-public class SimpleLinkedListImpl<E> implements LinkedList<E>, Iterable<E>{
+public class SimpleLinkedListImpl<E> implements LinkedList<E>, Iterable<E> {
 
     protected int size;
     protected Node<E> first;
@@ -10,11 +10,6 @@ public class SimpleLinkedListImpl<E> implements LinkedList<E>, Iterable<E>{
     @Override
     public void insertFirst(E value) {
         first = new Node<>(value, first);
-
-/*        Node<E> actualFirst = first;
-        Node<E> newFirst = new Node<>(value, actualFirst);
-        this.first = newFirst;*/
-
         size++;
     }
 
@@ -109,10 +104,22 @@ public class SimpleLinkedListImpl<E> implements LinkedList<E>, Iterable<E>{
 
     @Override
     public Iterator<E> iterator() {
-        return  null/*new ListIterator<E>()*/;
+        return new ListIterator<E>();
     }
 
-    private class ListIterator<E> /*implements Iterator<E> */{
+    private class ListIterator<E> implements Iterator<E> {
+        private Node curNode = first;
 
+        @Override
+        public boolean hasNext() {
+            return curNode != null;
+        }
+
+        @Override
+        public E next() {
+            E curValue = (E) curNode.item;
+            curNode = curNode.next;
+            return curValue;
+        }
     }
 }
