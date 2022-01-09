@@ -6,6 +6,10 @@ public interface Tree<E extends Comparable<? super E>> {
         IN_ORDER, PRE_ORDER, POST_ORDER
     }
 
+    int getDepthLeft();
+
+    int getDepthRight();
+
     boolean add(E value);
 
     boolean contains(E value);

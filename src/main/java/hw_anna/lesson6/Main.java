@@ -1,39 +1,36 @@
 package hw_anna.lesson6;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+
 public class Main {
+    private static final int TREE_AMOUNT = 3;
 
     public static void main(String[] args) {
+        List<Tree<Integer>> trees = new LinkedList<>();
 
+        for (int i = 0; i < TREE_AMOUNT; i++) {
+            trees.add(createTree());
+        }
+
+        for (Tree<Integer> tree : trees) {
+            tree.display();
+            System.out.println();
+            System.out.println();
+        }
+    }
+
+    private static Tree<Integer> createTree() {
         Tree<Integer> tree = new TreeImpl<>();
+        fillTree(tree);
+        return tree;
+    }
 
-        tree.add(60);
-        tree.add(50);
-        tree.add(66);
-        tree.add(40);
-        tree.add(55);
-        tree.add(70);
-        tree.add(31);
-        tree.add(45);
-        tree.add(42);
-        tree.add(43);
-        tree.add(69);
-        tree.add(67);
-        tree.add(68);
-        tree.add(81);
-
-        tree.display();
-//
-//        tree.remove(31);
-//        tree.remove(42);
-//        tree.remove(70);
-//        tree.remove(40);
-        tree.remove(60);
-//
-        tree.display();
-//
-        tree.traverse(Tree.TraversMode.IN_ORDER);
-        tree.traverse(Tree.TraversMode.PRE_ORDER);
-        tree.traverse(Tree.TraversMode.POST_ORDER);
-
+    private static void fillTree(Tree<Integer> tree) {
+        Random rand = new Random();
+        while (tree.getDepthLeft() < 4 && tree.getDepthRight() < 4) {
+            tree.add(rand.nextInt(-26, 26));
+        }
     }
 }
