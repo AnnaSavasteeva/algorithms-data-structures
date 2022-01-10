@@ -26,20 +26,12 @@ public class Node<T extends Comparable<? super T>> {
         this.leftChild = leftChild;
     }
 
-    public boolean hasLeftChild() {
-        return leftChild != null;
-    }
-
     public Node<T> getRightChild() {
         return rightChild;
     }
 
     public void setRightChild(Node<T> rightChild) {
         this.rightChild = rightChild;
-    }
-
-    public boolean hasRightChild() {
-        return rightChild != null;
     }
 
     public boolean isLeftChild(T value) {

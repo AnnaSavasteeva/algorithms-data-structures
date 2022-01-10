@@ -16,6 +16,7 @@ public class Main {
 
         for (Tree<Integer> tree : trees) {
             tree.display();
+            System.out.println(tree.isBalanced());
             System.out.println();
             System.out.println();
         }

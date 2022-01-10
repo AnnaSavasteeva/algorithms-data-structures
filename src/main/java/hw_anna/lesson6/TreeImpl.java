@@ -84,6 +84,30 @@ public class TreeImpl<E extends Comparable<? super E>> implements Tree<E> {
     }
 
     @Override
+    public boolean isBalanced() {
+        if (root == null || size == 1) return true;
+
+        int leftHeight = 0;
+        int rightHeight = 0;
+        Node<?> leftBranch = root.getLeftChild();
+        Node<?> rightBranch = root.getRightChild();
+
+        while (leftBranch != null) {
+            leftHeight++;
+            System.out.println(leftHeight);
+            leftBranch = leftBranch.getLeftChild();
+        }
+
+        while (rightBranch != null) {
+            rightHeight++;
+            System.out.println(rightHeight);
+            rightBranch = rightBranch.getRightChild();
+        }
+
+        return Math.abs(leftHeight - rightHeight) <= 1;
+    }
+
+    @Override
     public boolean remove(E value) {
         NodeAndParent nodeAndParent = doFind(value);
         Node<E> removed = nodeAndParent.current;
@@ -168,8 +192,6 @@ public class TreeImpl<E extends Comparable<? super E>> implements Tree<E> {
     public int size() {
         return size;
     }
-
-
 
     public void display() {
         Stack<Node<E>> globalStack = new Stack<>();
