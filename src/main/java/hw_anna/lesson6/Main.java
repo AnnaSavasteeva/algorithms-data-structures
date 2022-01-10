@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Main {
-    private static final int TREE_AMOUNT = 3;
+    private static final int TREE_AMOUNT = 20;
 
     public static void main(String[] args) {
         List<Tree<Integer>> trees = new LinkedList<>();
@@ -20,6 +20,20 @@ public class Main {
             System.out.println();
             System.out.println();
         }
+
+        getAmountOfUnbalancedTrees(trees);
+    }
+
+    private static void getAmountOfUnbalancedTrees(List<Tree<Integer>> trees) {
+        int unbalancedTreesCount = 0;
+
+        for (Tree<Integer> tree : trees) {
+            if (!tree.isBalanced()) {
+                unbalancedTreesCount++;
+            }
+        }
+
+        System.out.println("% of unbalanced trees: " + (unbalancedTreesCount * 100 / TREE_AMOUNT));
     }
 
     private static Tree<Integer> createTree() {

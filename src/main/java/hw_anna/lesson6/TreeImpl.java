@@ -85,26 +85,32 @@ public class TreeImpl<E extends Comparable<? super E>> implements Tree<E> {
 
     @Override
     public boolean isBalanced() {
-        if (root == null || size == 1) return true;
+        return isBalancedRecursive(this.root, -1).isBalanced;
+    }
 
-        int leftHeight = 0;
-        int rightHeight = 0;
-        Node<?> leftBranch = root.getLeftChild();
-        Node<?> rightBranch = root.getRightChild();
-
-        while (leftBranch != null) {
-            leftHeight++;
-            System.out.println(leftHeight);
-            leftBranch = leftBranch.getLeftChild();
+    private Result isBalancedRecursive(Node<?> node, int depth) {
+        if (node == null) {
+            return new Result(true, -1);
         }
 
-        while (rightBranch != null) {
-            rightHeight++;
-            System.out.println(rightHeight);
-            rightBranch = rightBranch.getRightChild();
-        }
+        Result leftSubtreeResult = isBalancedRecursive(node.getLeftChild(), depth + 1);
+        Result rightSubtreeResult = isBalancedRecursive(node.getRightChild(), depth + 1);
 
-        return Math.abs(leftHeight - rightHeight) <= 1;
+        boolean isBalanced = Math.abs(leftSubtreeResult.height - rightSubtreeResult.height) <= 1;
+        boolean subtreesAreBalanced = leftSubtreeResult.isBalanced && rightSubtreeResult.isBalanced;
+        int height = Math.max(leftSubtreeResult.height, rightSubtreeResult.height) + 1;
+
+        return new Result(isBalanced && subtreesAreBalanced, height);
+    }
+
+    private static class Result {
+        private final boolean isBalanced;
+        private final int height;
+
+        private Result(boolean isBalanced, int height) {
+            this.isBalanced = isBalanced;
+            this.height = height;
+        }
     }
 
     @Override
